@@ -1,0 +1,114 @@
+/* Importação de fontes do Google Fonts (exemplo) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Estilos Globais */
+body {
+    font-family: 'Roboto', sans-serif; /* Aplica a fonte Roboto ao corpo do site */
+    background-color: #f8f9fa; /* Um cinza bem claro para o fundo */
+    color: #343a40; /* Uma cor de texto escura, mas não preta pura */
+}
+
+/* Personalização do Header (cabeçalho) */
+header {
+    /* CORREÇÃO DA VISIBILIDADE DO LOGO: */
+    /* Mudamos o fundo para um azul mais claro, que contraste com o cinza e azul do logo */
+    background-color: #007bff !important; /* Azul primário do Bootstrap, para melhor contraste com o logo */
+    border-bottom: 5px solid #ffc107; /* Linha amarela/laranja na parte inferior do cabeçalho */
+
+    /* ADICIONANDO ESPAÇO ABAIXO DO CABEÇALHO: */
+    margin-bottom: 30px; /* Adiciona uma margem de 30 pixels na parte inferior do cabeçalho */
+    /* Você pode ajustar este valor (ex: 20px, 40px) conforme o desejado */
+}
+
+/* Estilos para o logo no cabeçalho */
+header .navbar-brand img {
+    height: 40px; /* Define a altura do logo */
+}
+
+/* Personalização do Logotipo de texto dentro do header */
+/* Mantemos o texto "R&D" branco para contraste com o novo fundo azul */
+header .navbar-brand .text-white {
+    color: white !important; /* Garante que o texto "R&D" permaneça branco */
+    font-weight: 700; /* Negrito para o logo */
+}
+
+/* Personalização do "GRUPO" no logo (se for azul) */
+header .navbar-brand .text-info {
+    color: #17a2b8 !important; /* Bootstrap 'info' é um azul ciano, ajuste se a cor do seu logo for diferente */
+    /* Você pode usar a cor exata do azul do seu logo aqui. Ex: color: #0099ff; */
+}
+
+
+/* Ajustes no Carrossel (Hero Section) */
+.hero-carousel .carousel-item img {
+    object-fit: cover;
+    height: 500px;
+}
+
+.hero-carousel .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente um pouco mais escuro para o texto */
+    padding: 20px;
+    border-radius: 8px;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 900px; /* Aumentei um pouco a largura máxima do texto */
+}
+
+/* Personalização dos Botões de Chamada para Ação no Carrossel */
+.hero-carousel .carousel-caption .btn-warning {
+    background-color: #ffc107 !important; /* Cor amarela/laranja para o botão */
+    border-color: #ffc107 !important;
+    color: #343a40 !important; /* Cor do texto no botão */
+    font-weight: bold;
+    padding: 10px 25px; /* Aumenta o padding do botão */
+    font-size: 1.1em; /* Aumenta o tamanho da fonte do botão */
+}
+
+/* Seção de Conteúdo Principal (Exemplo: Cards de Serviços/Seguros) */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out; /* Adiciona uma transição suave para o efeito de hover */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efeito de leve levantamento ao passar o mouse */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada no hover */
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    color: #004d9a;
+    font-weight: bold;
+}
+
+.card-body .btn-primary {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+}
+
+/* Rodapé (Footer) do Site */
+footer {
+    background-color: #212529 !important;
+}
+
+footer a {
+    color: #ffc107 !important;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Adicionando Font Awesome para ícones sociais no footer (se você for usar) */
+/* Você precisa adicionar este link no <head> do seu HTML para que os ícones apareçam */
+/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> */
+/* Se estiver usando um kit Font Awesome: <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script> */
