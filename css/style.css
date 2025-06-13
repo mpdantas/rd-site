@@ -1,173 +1,289 @@
-/* -----------------------------------------------------
-   Estilos Globais e Reset (css/style.css)
-   -----------------------------------------------------
-   Estas são regras básicas para garantir consistência entre navegadores
-   e definir propriedades fundamentais como a fonte do site.
-*/
-body {
-    margin: 0; /* Remove a margem padrão que navegadores adicionam ao <body> */
-    font-family: 'Arial', sans-serif; /* Define uma fonte padrão. Podemos mudar depois. */
-    background-color: #f4f4f4; /* Uma cor de fundo suave para o corpo do site */
-    color: #333; /* Cor de texto padrão */
-    line-height: 1.6; /* Altura da linha para melhor legibilidade */
+/* Importação de fontes do Google Fonts */
+/* Usaremos 'Roboto' para o texto geral e 'Montserrat' para títulos,
+   para dar um visual moderno e limpo. */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@300;400;700&display=swap');
+
+/* Variáveis CSS para Cores - Boa Prática! */
+/* Definir cores em variáveis facilita a manutenção e a consistência. */
+:root {
+    --primary-blue: #007bff; /* Azul principal (similar ao do logo R&D) */
+    --dark-blue: #0056b3; /* Azul mais escuro para hover, etc. */
+    --accent-orange: #ffc107; /* Laranja de destaque (para botões, etc.) */
+    --text-dark: #343a40; /* Cor padrão para textos escuros */
+    --text-light: #f8f9fa; /* Cor padrão para textos claros (quase branco) */
+    --bg-dark: #212529; /* Fundo escuro (para cabeçalho e rodapé) */
+    --light-gray: #f8f9fa; /* Fundo claro para seções */
+    --card-shadow: rgba(0, 0, 0, 0.1); /* Sombra padrão para cards */
+    --hover-shadow: rgba(0, 0, 0, 0.2); /* Sombra no hover para cards */
 }
 
-/* Um reset básico para remover padding/margin padrão de alguns elementos */
-h1, h2, h3, h4, h5, h6, p, ul {
+/* Estilos Globais e Reset Básico */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho do elemento */
 }
 
-ul {
-    list-style: none; /* Remove os marcadores de lista padrão */
+html {
+    scroll-behavior: smooth; /* Adiciona rolagem suave ao clicar em âncoras */
 }
 
-a {
-    text-decoration: none; /* Remove o sublinhado padrão de todos os links */
-    color: inherit; /* Links herdam a cor do texto do elemento pai por padrão */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--light-gray);
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
 }
 
-img {
-    max-width: 100%; /* Garante que imagens não transbordem seus contêineres */
-    height: auto; /* Mantém a proporção da imagem */
-    display: block; /* Remove espaço extra abaixo de imagens (problema comum com inline) */
+/* Reutilizando um container básico para centralizar o conteúdo */
+.header-container,
+/* .hero-content, hero-content já tem max-width e padding específicos */
+.services-section .section-title,
+.services-grid,
+.footer-container {
+    max-width: 1200px; /* Largura máxima do conteúdo */
+    margin: 0 auto; /* Centraliza o container */
+    /* Padding lateral para telas menores. Ajustado abaixo para o header-container */
+    padding: 0 20px; 
 }
 
-
-/* -----------------------------------------------------
-   Estilos para o Cabeçalho Principal (main-header)
-   -----------------------------------------------------
-   Aqui estilizamos a barra superior do site, contendo o logo e o menu.
-*/
+/* --- CABEÇALHO (Header) --- */
 .main-header {
-    background-color: #004a8f; /* Um azul escuro, ideal para uma corretora de seguros */
-    padding: 15px 0; /* Preenchimento vertical. 15px em cima/baixo, 0 nas laterais */
-    color: #fff; /* Cor do texto no cabeçalho será branco */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Uma leve sombra para dar profundidade */
+    background-color: var(--primary-blue); /* Fundo azul principal */
+    padding: 15px 0; /* Padding vertical */
+    border-bottom: 5px solid var(--accent-orange); /* Linha de destaque */
+    margin-bottom: 30px; /* Espaço abaixo do cabeçalho */
 }
 
-/* Estilos para o Contêiner dentro do Cabeçalho */
-/* Usamos Flexbox para alinhar logo e navegação lado a lado e centralizá-los verticalmente */
 .header-container {
-    max-width: 1200px; /* Largura máxima do conteúdo centralizado */
-    margin: 0 auto; /* Centraliza o contêiner na página */
-    padding: 0 20px; /* Preenchimento horizontal para evitar que o conteúdo encoste nas bordas da tela */
-    display: flex; /* Habilita Flexbox */
-    justify-content: space-between; /* Alinha o logo à esquerda e o menu à direita */
-    align-items: center; /* Centraliza itens verticalmente */
+    display: flex; /* Transforma em flexbox para logo e navegação */
+    justify-content: space-between; /* Espaça logo e nav nas pontas */
+    align-items: center; /* Alinha verticalmente */
+    width: 100%; /* Ocupa toda a largura do main-header */
+    
+    /* MOVER LOGO MAIS À ESQUERDA: */
+    /* Remove o padding padrão de 20px na esquerda para encostar mais */
+    padding-left: 0; 
+    padding-right: 20px; /* Mantém o padding na direita para o menu */
 }
 
-/* Estilos para o Logotipo e Nome da Marca */
 .brand-logo {
-    display: flex; /* Usa Flexbox para alinhar a imagem e o texto do logo */
-    align-items: center; /* Centraliza a imagem e o texto verticalmente */
-    font-size: 1.8em; /* Tamanho da fonte para o nome da marca */
-    font-weight: bold; /* Negrito */
-    color: #fff; /* Cor branca para o nome da marca */
+    display: flex; /* Flexbox para alinhar logo e texto */
+    align-items: center; /* Alinha verticalmente */
+    text-decoration: none; /* Remove sublinhado do link */
+    color: var(--text-light); /* Cor do texto padrão do logo */
+    font-size: 1.8em; /* Tamanho da fonte do "R&D" */
+    font-weight: 700; /* Negrito */
+    font-family: 'Montserrat', sans-serif; /* Fonte para o logo */
+    white-space: nowrap; /* Impede que o texto "R&D" quebre de linha antes do slogan */
+
+    /* Espaçamento adicional para o logo se for preciso mais para a esquerda, */
+    /* mas geralmente ajustar o padding do .header-container já resolve. */
+    /* margin-left: -10px; /* Use isso apenas se o padding-left: 0px não for suficiente */
 }
 
 .brand-logo img {
-    height: 45px; /* Altura específica para o logo */
-    margin-right: 10px; /* Espaço entre o logo e o texto */
+    height: 45px; /* Altura do logo (ajuste conforme o tamanho ideal) */
+    margin-right: 100px; /* Espaço entre o logo e o texto. Ajuste para o que ficar melhor. */
+    margin-left: 20px; /* ADICIONADO: Padding inicial do logo para as bordas */
 }
 
-.brand-logo .brand-highlight {
-    color: #ffc107; /* Cor de destaque (amarelo/laranja) para o "GRUPO" */
+.brand-logo span { 
+    /* CORREÇÃO DA QUEBRA DE LINHA: */
+    display: inline; /* Faz com que o span se comporte como um texto na linha */
+    white-space: nowrap; /* Garante que o texto não quebre em múltiplas linhas */
+    /* Removido: flex-direction: column; e line-height: 1; que causavam a quebra */
 }
 
-/* Estilos para a Navegação Principal */
+.brand-logo span .brand-highlight {
+    color: var(--text-light); /* Cor de destaque para "A SUA CORRETORA" */
+    font-size: 0.7em; /* Tamanho menor para o slogan (0.7em do pai 1.8em = 1.26em) */
+    font-family: 'Roboto', sans-serif; /* Mantenha a fonte mais fina para o slogan */
+    font-weight: 400;
+    margin-left: 5px; /* Pequeno espaçamento à esquerda do slogan em relação ao "R&D" */
+}
+
+/* --- NAVEGAÇÃO PRINCIPAL (Navbar) --- */
 .main-nav .nav-list {
-    display: flex; /* Usa Flexbox para alinhar os itens do menu horizontalmente */
+    list-style: none; /* Remove marcadores de lista */
+    display: flex; /* Transforma os itens em flexbox para alinhamento horizontal */
+    gap: 25px; /* Espaço entre os itens da lista */
 }
 
-.main-nav .nav-list li {
-    margin-left: 25px; /* Espaço entre os itens do menu */
+.main-nav .nav-list li a {
+    text-decoration: none; /* Remove sublinhado dos links */
+    color: var(--text-light); /* Cor dos links */
+    font-weight: 400; /* Peso da fonte */
+    padding: 5px 0; /* Padding para a área de clique */
+    transition: color 0.3s ease; /* Transição suave na cor */
+    position: relative; /* Para o efeito de sublinhado animado */
 }
 
-.main-nav .nav-list a {
-    color: #fff; /* Cor branca para os links do menu */
-    font-weight: 500; /* Peso da fonte */
-    transition: color 0.3s ease; /* Transição suave na cor ao passar o mouse */
-    font-size: 1.1em; /* Tamanho da fonte dos links */
+.main-nav .nav-list li a:hover {
+    color: var(--accent-orange); /* Cor de destaque no hover */
 }
 
-.main-nav .nav-list a:hover {
-    color: #ffc107; /* Cor de destaque (amarelo/laranja) ao passar o mouse */
+/* Efeito de sublinhado animado no hover */
+.main-nav .nav-list li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background-color: var(--accent-orange);
+    transition: width 0.3s ease-out;
 }
 
-/* Estilos para o botão de menu 'hamburger' (mobile) */
-/* Por padrão, escondemos o botão em telas grandes e mostraremos em telas pequenas via media queries */
+.main-nav .nav-list li a:hover::after {
+    width: 100%;
+}
+
+/* --- BOTÃO DE TOGGLE (HAMBURGUER) PARA MOBILE --- */
 .menu-toggle {
-    display: none; /* Esconde o botão hamburger por padrão */
+    display: none; /* Esconde o botão por padrão em telas grandes */
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
+    z-index: 1000; /* Garante que o botão fique acima de outros elementos */
 }
 
 .menu-toggle .icon-bar {
     display: block;
     width: 25px;
     height: 3px;
-    background-color: #fff;
+    background-color: var(--text-light); /* Cor do "hambúrguer" */
     margin: 5px 0;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
 }
 
-/* -----------------------------------------------------
-   Estilos para a Seção Hero (hero-section) - Primeira Dobra
-   -----------------------------------------------------
-   Estiliza a seção de destaque abaixo do cabeçalho.
-*/
+/* --- SEÇÃO HERO (BANNER DE DESTAQUE) --- */
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/hero-banner.jpg') no-repeat center center/cover;
-    color: #fff;
+    position: relative;
+    height: 600px; /* Altura do banner */
+    background: url('../images/seguro.jpg') no-repeat center center/cover; /* Imagem de fundo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 100px 20px; /* Grande preenchimento para uma seção de destaque */
-    margin-top: 30px; /* Espaço entre o header e a hero section */
+    color: var(--text-light);
+    margin-top: -30px; /* Para que o banner suba e encoste no cabeçalho */
+    padding: 0 20px; /* Padding lateral para o conteúdo */
+}
+
+.hero-section::before { /* Overlay para melhorar contraste */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay preto semi-transparente */
+    z-index: 1;
 }
 
 .hero-content {
-    max-width: 800px;
-    margin: 0 auto;
+    position: relative;
+    z-index: 3;
+    max-width: 900px; /* Largura máxima do texto */
+    padding: 20px;
 }
 
 .hero-content h1 {
-    font-size: 3.5em;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.8em;
     margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
 }
 
 .hero-content p {
-    font-size: 1.3em;
+    font-size: 1.5em;
     margin-bottom: 30px;
-    opacity: 0.9;
+    font-weight: 300;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Estilos para Botões de Ação Personalizados */
+.btn-primary-action,
+.btn-secondary-action {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent; /* Adiciona uma borda transparente para manter o tamanho no hover */
 }
 
 .btn-primary-action {
-    display: inline-block;
-    background-color: #ffc107; /* Amarelo/Laranja para o botão principal */
-    color: #333; /* Texto escuro no botão */
-    padding: 15px 30px;
-    border-radius: 5px;
-    font-size: 1.2em;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    background-color: var(--accent-orange);
+    color: var(--text-dark);
+    border-color: var(--accent-orange);
 }
 
 .btn-primary-action:hover {
-    background-color: #e0a800; /* Escurece um pouco no hover */
+    background-color: var(--dark-blue); /* Mudei para azul escuro no hover, fica legal */
+    color: var(--text-light);
+    border-color: var(--dark-blue);
 }
 
+.btn-secondary-action {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    border-color: var(--primary-blue);
+}
 
-/* -----------------------------------------------------
-   Estilos para a Seção de Serviços/Cards (services-section)
-   -----------------------------------------------------
-   Estiliza a grade de cards dos seguros.
-*/
+.btn-secondary-action:hover {
+    background-color: var(--dark-blue);
+    border-color: var(--dark-blue);
+    color: var(--text-light);
+}
+
+/* --- SEÇÃO DE TÍTULO DE PÁGINAS INTERNAS (page-hero) --- */
+.page-hero {
+    background-color: var(--primary-blue); /* Fundo azul, similar ao header */
+    color: var(--text-light); /* Texto claro */
+    padding: 60px 20px; /* Padding generoso */
+    text-align: center;
+    margin-bottom: 40px; /* Espaço abaixo do banner */
+    margin-top: -30px; /* Para subir e encostar no cabeçalho */
+}
+
+.page-hero-content h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.page-hero-content p {
+    font-size: 1.2em;
+    font-weight: 300;
+    max-width: 800px;
+    margin: 0 auto; /* Centraliza o parágrafo */
+}
+
+/* Estilo para o link da página atual no menu (Navegação) */
+.main-nav .nav-list li a.active {
+    color: var(--accent-orange); /* Muda a cor do link ativo para laranja */
+    font-weight: 700; /* Deixa o link ativo em negrito */
+}
+
+/* Efeito de sublinhado animado no hover para o link ativo (se já tiver um sublinhado ativo) */
+.main-nav .nav-list li a.active::after {
+    width: 100%; /* Garante que o sublinhado esteja ativo por padrão na página atual */
+    background-color: var(--accent-orange);
+}
+
+/* --- SEÇÃO DE SERVIÇOS/SEGUROS --- */
 .services-section {
-    padding: 60px 20px;
-    background-color: #fff;
-    margin-top: 50px; /* Espaço entre a hero section e a services section */
+    padding: 60px 0; /* Padding superior e inferior para a seção */
+    background-color: var(--light-gray); /* Fundo claro para esta seção */
 }
 
 .services-section .section-title {
@@ -176,166 +292,405 @@ img {
 }
 
 .services-section .section-title h2 {
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.5em;
-    color: #004a8f; /* Cor do título da seção */
+    color: var(--primary-blue);
 }
 
 .services-grid {
-    display: grid; /* Habilita CSS Grid para o layout dos cards */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Colunas responsivas */
+    display: grid; /* Usa CSS Grid para o layout dos cards */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 3 cards por linha em desktop */
     gap: 30px; /* Espaço entre os cards */
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 0 20px; /* Garante padding lateral nos cards */
 }
 
 .service-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    display: flex; /* Flexbox para o conteúdo do card */
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden; /* Para que a imagem respeite o border-radius */
+    box-shadow: 0 4px 10px var(--card-shadow); /* Sombra suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Para flexbox interno do card */
     flex-direction: column; /* Conteúdo em coluna */
     text-align: center;
 }
 
 .service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px); /* Efeito de levante no hover */
+    box-shadow: 0 8px 20px var(--hover-shadow); /* Sombra mais intensa no hover */
 }
 
 .service-card img {
-    height: 200px; /* Altura fixa para a imagem do card */
-    object-fit: cover;
     width: 100%;
+    height: 200px; /* Altura fixa para as imagens dos cards */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
 }
 
 .service-card h3 {
-    font-size: 1.5em;
-    color: #004a8f;
-    margin: 20px 15px 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6em;
+    color: var(--primary-blue);
+    margin: 20px 0 10px;
+    padding: 0 15px; /* Padding para texto h3 */
 }
 
 .service-card p {
     font-size: 0.95em;
-    color: #555;
-    padding: 0 15px 20px;
-    flex-grow: 1; /* Faz o parágrafo ocupar o espaço restante */
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante */
+    padding: 0 15px; /* Padding para texto p */
 }
 
-.btn-secondary-action {
-    display: inline-block;
-    background-color: #007bff; /* Azul secundário para os botões dos cards */
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin-bottom: 20px; /* Espaço abaixo do botão */
-    transition: background-color 0.3s ease;
+.service-card .btn-secondary-action {
+    margin: 0 20px 20px; /* Margem para o botão dentro do card */
+    align-self: center; /* Centraliza o botão */
+    width: calc(100% - 40px); /* Ocupa a largura total do card menos a margem */
 }
 
-.btn-secondary-action:hover {
-    background-color: #0056b3; /* Escurece no hover */
+/* --- SEÇÃO SOBRE NÓS --- */
+.about-section {
+    padding: 60px 0;
+    background-color: white; /* Fundo branco para a seção */
+    text-align: center; /* Centraliza o texto dentro da seção */
 }
 
+.about-intro {
+    max-width: 900px; /* Limita a largura do texto de introdução */
+    margin: 0 auto 50px auto; /* Centraliza e adiciona margem inferior */
+    padding: 0 20px; /* Padding lateral */
+}
 
-/* -----------------------------------------------------
-   Estilos para o Rodapé (main-footer)
-   -----------------------------------------------------
+.about-intro h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2em;
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+}
+
+.about-intro p {
+    font-size: 1.1em;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.mission-vision-values {
+    display: flex; /* Usa flexbox para alinhar os cards de missão/visão/valores */
+    flex-wrap: wrap; /* Permite que os cards quebrem linha */
+    justify-content: center; /* Centraliza os cards */
+    gap: 30px; /* Espaçamento entre os cards */
+    padding: 0 20px; /* Padding lateral */
+}
+
+.value-card {
+    background-color: white; /* Fundo branco para os cards de valor */
+    border-radius: 10px;
+    box-shadow: 0 6px 15px var(--card-shadow); /* Sombra mais pronunciada */
+    padding: 40px 30px; /* Aumentei o padding interno para mais 'respiro' */
+    flex: 1; /* Permite que o card ocupe espaço */
+    min-width: 280px; /* Largura mínima para o card */
+    max-width: 380px; /* Largura máxima para o card em desktop */
+    text-align: left; /* Alinha o texto à esquerda dentro do card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adiciona transição para o hover */
+    border: 1px solid #007bff; /* Borda muito sutil */
+}
+
+.value-card:hover {
+    transform: translateY(-8px); /* Efeito de levantamento ao passar o mouse */
+    box-shadow: 0 12px 25px var(--hover-shadow); /* Sombra mais intensa no hover */
+}
+
+.value-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em; /* Títulos um pouco maiores */
+    color: var(--primary-blue); /* Títulos dos cards em azul */
+    margin-bottom: 20px; /* Aumentei a margem abaixo do título */
+    position: relative; /* Para possíveis decorações no título */
+    padding-bottom: 5px; /* Espaço para uma possível linha */
+}
+
+/* Opcional: Adicionar uma linha abaixo dos títulos dos value-cards */
+/*
+.value-card h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-orange);
+    border-radius: 2px;
+}
 */
+
+.value-card p,
+.value-card ul {
+    font-size: 1em; /* Fonte um pouco maior para o corpo do texto */
+    color: var(--text-dark);
+    line-height: 1.7; /* Melhorar legibilidade */
+}
+
+.value-card ul {
+    list-style: none; /* Remove marcadores padrão */
+    padding-left: 0;
+    margin-top: 10px; /* Espaço acima da lista de valores */
+}
+
+.value-card ul li {
+    margin-bottom: 10px; /* Espaço entre os itens da lista */
+    position: relative;
+    padding-left: 25px; /* Espaço para um ícone/marcador customizado */
+}
+
+/* Opcional: Adicionar um marcador customizado para itens da lista */
+/*
+.value-card ul li::before {
+    content: '\2022'; /* Código Unicode para um bullet point simples */
+    /* content: '\2713'; /* Código Unicode para um checkmark (✓) */
+    /* position: absolute;
+    left: 0;
+    color: var(--accent-orange); /* Cor do marcador */
+    /* font-weight: bold;
+}
+*/
+
+.value-card ul li strong {
+    color: var(--primary-blue); /* Deixa a categoria (ex: Ética) em azul */
+    font-weight: 700; /* Negrito mais forte */
+}
+
+/* --- RESPONSIVIDADE PARA SEÇÃO SOBRE NÓS --- */
+@media (max-width: 767px) {
+    .about-intro h2 {
+        font-size: 1.8em;
+    }
+
+    .about-intro p {
+        font-size: 1em;
+    }
+
+    .mission-vision-values {
+        flex-direction: column; /* Empilha os cards de valor em mobile */
+        align-items: center; /* Centraliza os cards empilhados */
+    }
+
+    .value-card {
+        min-width: unset; /* Remove min-width para mobile */
+        width: 100%; /* Ocupa toda a largura disponível */
+        max-width: 400px; /* Limita a largura em telas maiores de mobile/tablet */
+        text-align: center; /* Centraliza o texto no card em mobile */
+        padding: 30px 20px; /* Ajusta padding para mobile */
+    }
+    .value-card h3 {
+        text-align: center; /* Garante que o título esteja centralizado no mobile */
+    }
+    /* Se usar o ::after no h3 e quiser centralizá-lo em mobile */
+    /*
+    .value-card h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    */
+}
+
+/* --- RESPONSIVIDADE PARA SEÇÃO SOBRE NÓS --- */
+@media (max-width: 767px) {
+    .about-intro h2 {
+        font-size: 1.8em;
+    }
+
+    .about-intro p {
+        font-size: 1em;
+    }
+
+    .mission-vision-values {
+        flex-direction: column; /* Empilha os cards de valor em mobile */
+        align-items: center; /* Centraliza os cards empilhados */
+    }
+
+    .value-card {
+        min-width: unset; /* Remove min-width para mobile */
+        width: 100%; /* Ocupa toda a largura disponível */
+        max-width: 400px; /* Limita a largura em telas maiores de mobile/tablet */
+        text-align: center; /* Centraliza o texto no card em mobile */
+    }
+}
+
+/* --- RODAPÉ (Footer) --- */
 .main-footer {
-    background-color: #222; /* Fundo escuro para o rodapé */
-    color: #eee; /* Cor de texto clara */
-    text-align: center; /* Centraliza o texto */
-    padding: 30px 20px;
-    margin-top: 60px; /* Espaço acima do rodapé */
+    background-color: var(--bg-dark); /* Fundo escuro */
+    color: var(--text-light); /* Texto claro padrão para todo o rodapé */
+    padding: 30px 0; /* Padding vertical */
+    font-size: 0.9em; /* Tamanho de fonte um pouco menor para o rodapé */
+}
+
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2); /* Linha cinza clara e sutil */
+    margin-bottom: 30px; /* Espaço abaixo da linha */
 }
 
 .footer-container {
+    display: flex; /* ATIVADO: Transforma o container em flexbox para as colunas */
+    flex-wrap: wrap; /* PERMITE QUEBRA: Permite que as colunas quebrem para a próxima linha em telas pequenas */
+    justify-content: space-between; /* ESPAÇA AS COLUNAS: Distribui o espaço entre as colunas */
+    align-items: flex-start; /* ALINHA O TOPO: Alinha o topo das colunas */
+    gap: 30px; /* ESPAÇO ENTRE ELAS: Espaço entre as colunas */
+    
+    /* Mantenha a largura máxima e centralização, já definidas globalmente ou localmente */
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px; /* Mantém o padding lateral */
 }
 
-.main-footer p {
-    font-size: 0.9em;
-    margin-bottom: 10px;
+.footer-col {
+    /* FLEX-BASIS: Define uma largura inicial para cada coluna. */
+    /* Isso é mais flexível que 'width' e trabalha bem com 'flex: 1' */
+    flex: 1; /* Permite que as colunas cresçam e encolham */
+    min-width: 200px; /* Largura mínima antes de quebrar para a próxima linha */
+    max-width: 25%; /* Para telas grandes, tenta limitar a 4 colunas (100% / 4 = 25%) */
+    padding: 10px 0; /* Pequeno padding para o conteúdo da coluna */
+    text-align: left; /* Alinha o texto à esquerda dentro de cada coluna */
 }
 
-.main-footer .social-links a {
-    color: #ffc107; /* Cor de destaque para os links sociais */
-    margin: 0 10px;
+/* Estilos específicos para o Logo no Footer */
+.main-footer .brand-logo {
+    font-size: 1.5em; /* Um pouco menor que o logo do header */
+    margin-bottom: 15px; /* Espaço abaixo do logo no footer */
+    justify-content: flex-start; /* Alinha o logo à esquerda da coluna */
+    white-space: normal; /* Permite que o texto do logo quebre em várias linhas se necessário */
+    padding-left: 0; /* Remove qualquer padding esquerdo extra */
+}
+
+.main-footer .brand-logo img {
+    height: 45px; /* Altura menor para o logo no footer */
+    margin-right: 10px; /* Espaçamento entre logo e texto */
+    margin-left: 0; /* Reseta a margem esquerda adicional que havíamos colocado para desktop */
+}
+
+.main-footer .brand-logo span {
+    display: inline; /* Garante que o texto "R&D A SUA CORRETORA" fique em linha no footer */
+    white-space: normal; /* Permite que o texto do slogan quebre linha se precisar no footer */
+}
+
+.main-footer .brand-logo .brand-highlight {
+    font-size: 0.6em; /* Slogan ainda menor no footer */
+    margin-left: 5px; /* Espaçamento entre R&D e o slogan */
+    display: inline; /* Garante que 'A SUA CORRETORA' fique na mesma linha */
+}
+
+
+/* Estilos para títulos de colunas no rodapé */
+.footer-col h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    color: var(--accent-orange); /* Títulos das colunas em laranja */
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+/* Estilos para listas de links no rodapé */
+.footer-col ul {
+    list-style: none; /* Remove marcadores de lista */
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 8px; /* Espaço entre os itens da lista */
+}
+
+.footer-col ul li a {
+    color: var(--text-light); /* Cor dos links */
+    text-decoration: none;
     transition: color 0.3s ease;
 }
 
-.main-footer .social-links a:hover {
-    color: #e0a800; /* Escurece no hover */
+.footer-col ul li a:hover {
+    color: var(--accent-orange); /* Cor de destaque no hover */
 }
 
+/* Estilos para links sociais no rodapé */
+.social-links {
+    display: flex; /* Para alinhar os ícones sociais horizontalmente */
+    gap: 15px; /* Espaço entre os ícones */
+    margin-top: 15px;
+    justify-content: flex-start; /* Alinha os ícones à esquerda da coluna */
+}
 
-/* -----------------------------------------------------
-   Estilos Responsivos (Media Queries)
-   -----------------------------------------------------
-   Adaptamos o layout para telas menores, como tablets e celulares.
-*/
+.social-links .social-icon {
+    color: var(--text-light); /* Cor dos ícones */
+    font-size: 1.5em; /* Tamanho dos ícones */
+    transition: color 0.3s ease;
+    text-decoration: none; /* Caso sejam textos, remove sublinhado */
+}
 
-/* Para Tablets (largura de tela até 768px) */
-@media (max-width: 768px) {
-    .main-header {
-        padding: 10px 0;
-    }
+.social-links .social-icon:hover {
+    color: var(--primary-blue); /* Cor de destaque no hover */
+}
 
+/* --- RESPONSIVIDADE (Media Queries) --- */
+
+/* Telas menores que 992px (Desktop -> Tablet) */
+@media (max-width: 991px) {
     .header-container {
-        flex-wrap: wrap; /* Permite que os itens quebrem linha */
-        justify-content: center; /* Centraliza logo e menu em mobile */
-        text-align: center; /* Garante que o texto do logo esteja centralizado */
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .brand-logo {
-        margin-bottom: 10px; /* Espaço abaixo do logo quando quebra linha */
-        font-size: 1.5em;
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 15px;
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .brand-logo img {
+        margin-left: 0;
     }
 
     .main-nav {
-        width: 100%; /* Menu ocupa toda a largura */
-        text-align: center;
-    }
-    
-    .main-nav .nav-list {
-        flex-direction: column; /* Itens do menu verticalmente */
-        display: none; /* Esconde o menu por padrão no mobile */
         width: 100%;
-        margin-top: 10px;
-        background-color: #003a6b; /* Fundo para o menu colapsado */
+        display: flex;
+        justify-content: center;
+        order: 2;
     }
 
-    /* Mostra o menu quando a classe 'active' é adicionada via JS */
+    .main-nav .nav-list {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100px;
+        left: 0;
+        width: 100%;
+        background-color: var(--dark-blue);
+        padding: 20px 0;
+        z-index: 999;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
     .main-nav .nav-list.active {
         display: flex;
     }
 
     .main-nav .nav-list li {
-        margin: 0; /* Remove margem horizontal */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador entre itens */
+        text-align: center;
+        margin: 10px 0;
     }
 
-    .main-nav .nav-list li:last-child {
-        border-bottom: none; /* Remove separador do último item */
+    .main-nav .nav-list li a {
+        font-size: 1.2em;
+        padding: 10px 0;
+        display: block;
     }
 
-    .main-nav .nav-list a {
-        padding: 10px 0; /* Aumenta área clicável em mobile */
-        display: block; /* Ocupa toda a largura do item de lista */
-    }
-
-    /* Mostra o botão hamburger em telas pequenas */
     .menu-toggle {
-        display: block; /* Mostra o botão hamburger */
-        margin-left: auto; /* Alinha à direita se o logo não quebrar linha */
-        /* Se o logo quebrar linha, ele já estará centralizado com o flex-wrap */
-    }
-
-    .hero-section {
-        padding: 60px 20px;
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 25px;
     }
 
     .hero-content h1 {
@@ -343,30 +698,35 @@ img {
     }
 
     .hero-content p {
-        font-size: 1.1em;
+        font-size: 1.2em;
     }
 
-    .services-section {
-        padding: 40px 20px;
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 
-    .services-section .section-title h2 {
-        font-size: 2em;
+    /* Rodapé em telas menores que 991px */
+    .footer-container {
+        flex-direction: column; /* Empilha as colunas verticalmente */
+        align-items: center; /* Centraliza as colunas */
+    }
+
+    .footer-col {
+        min-width: unset; /* Remove largura mínima */
+        max-width: 100%; /* Ocupa toda a largura */
+        text-align: center; /* Centraliza o texto das colunas */
+    }
+
+    .main-footer .brand-logo,
+    .social-links {
+        justify-content: center; /* Centraliza o logo e os links sociais em mobile */
     }
 }
 
-/* Para Celulares (largura de tela até 480px) */
-@media (max-width: 480px) {
-    .brand-logo img {
-        height: 35px;
-    }
-
-    .brand-logo {
-        font-size: 1.6em;
-    }
-
+/* Telas menores que 768px (Mobile) */
+@media (max-width: 767px) {
     .hero-section {
-        padding: 40px 15px;
+        height: 500px;
     }
 
     .hero-content h1 {
@@ -374,28 +734,118 @@ img {
     }
 
     .hero-content p {
-        font-size: 1em;
+        font-size: 1.1em;
     }
 
-    .btn-primary-action {
-        padding: 12px 25px;
+    .btn-primary-action,
+    .btn-secondary-action {
         font-size: 1em;
+        padding: 10px 20px;
     }
 
     .services-grid {
-        grid-template-columns: 1fr; /* Uma coluna única em telas muito pequenas */
-        gap: 20px;
+        grid-template-columns: 1fr; /* 1 card por linha em mobile */
+    }
+}
+}
+
+/* --- RESPONSIVIDADE (Media Queries) --- */
+
+/* Telas menores que 992px (Desktop -> Tablet) */
+@media (max-width: 991px) {
+    .header-container {
+        flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+        justify-content: center; /* Centraliza logo e nav em telas menores */
     }
 
-    .service-card h3 {
-        font-size: 1.3em;
+    .brand-logo {
+        width: 100%; /* Ocupa toda a largura */
+        justify-content: center; /* Centraliza o logo e o texto */
+        margin-bottom: 15px; /* Espaço abaixo do logo antes do menu */
+        padding-left: 0; /* Remove padding lateral em mobile para centralizar */
+        margin-left: 0; /* Garante que não haja margem negativa */
     }
 
-    .service-card p {
-        font-size: 0.85em;
+    .brand-logo img {
+        margin-left: 0; /* Remove a margem esquerda adicional que havíamos colocado para desktop */
     }
 
-    .main-footer {
-        padding: 20px 15px;
+    .main-nav {
+        width: 100%; /* Ocupa toda a largura */
+        display: flex; /* Garante que a nav seja um flex container */
+        justify-content: center; /* Centraliza o menu hambúrguer */
+        order: 2; /* Garante que a nav apareça abaixo do logo */
+    }
+
+    .main-nav .nav-list {
+        display: none; /* Esconde a lista de navegação por padrão em telas menores */
+        flex-direction: column; /* Itens em coluna */
+        position: absolute; /* Posição absoluta em relação ao body/viewport */
+        top: 100px; /* Distância do topo (ajustar se o header for dinâmico) */
+        left: 0;
+        width: 100%;
+        background-color: var(--dark-blue); /* Fundo para o menu aberto */
+        padding: 20px 0;
+        z-index: 999;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .main-nav .nav-list.active {
+        display: flex; /* Exibe a lista quando a classe 'active' é adicionada */
+    }
+
+    .main-nav .nav-list li {
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .main-nav .nav-list li a {
+        font-size: 1.2em;
+        padding: 10px 0;
+        display: block; /* Garante que o link ocupe toda a largura */
+    }
+
+    .menu-toggle {
+        display: block; /* Exibe o botão hambúrguer em telas menores */
+        position: absolute; /* Posiciona o hambúrguer no canto, livre do fluxo */
+        right: 20px; /* Distância da direita */
+        top: 25px; /* Distância do topo */
+    }
+
+    .hero-content h1 {
+        font-size: 2.5em; /* Ajusta o título do hero em mobile */
+    }
+
+    .hero-content p {
+        font-size: 1.2em; /* Ajusta o parágrafo do hero em mobile */
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Permite 2 cards por linha em tablets */
+    }
+}
+
+/* Telas menores que 768px (Tablet -> Mobile) */
+@media (max-width: 767px) {
+    .hero-section {
+        height: 500px; /* Altura menor para o banner em mobile */
+    }
+
+    .hero-content h1 {
+        font-size: 2em;
+    }
+
+    .hero-content p {
+        font-size: 1.1em;
+    }
+
+    .btn-primary-action,
+    .btn-secondary-action {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr; /* 1 card por linha em mobile */
     }
 }
