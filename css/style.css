@@ -37,16 +37,20 @@ body {
 }
 
 /* Reutilizando um container básico para centralizar o conteúdo */
+/* hero-content já tem max-width e padding específicos */
 .header-container,
-/* .hero-content, hero-content já tem max-width e padding específicos */
 .services-section .section-title,
 .services-grid,
-.footer-container {
+.footer-container,
+.about-intro, /* Incluído para About Intro */
+.mission-vision-values, /* Incluído para Missao Visao Valores Grid */
+.contact-section, /* Incluído para a seção de Contato */
+.map-embed { /* Incluído para o mapa */
     max-width: 1200px; /* Largura máxima do conteúdo */
     margin: 0 auto; /* Centraliza o container */
-    /* Padding lateral para telas menores. Ajustado abaixo para o header-container */
-    padding: 0 20px; 
+    padding: 0 20px; /* Padding nas laterais para telas menores */
 }
+
 
 /* --- CABEÇALHO (Header) --- */
 .main-header {
@@ -61,10 +65,7 @@ body {
     justify-content: space-between; /* Espaça logo e nav nas pontas */
     align-items: center; /* Alinha verticalmente */
     width: 100%; /* Ocupa toda a largura do main-header */
-    
-    /* MOVER LOGO MAIS À ESQUERDA: */
-    /* Remove o padding padrão de 20px na esquerda para encostar mais */
-    padding-left: 0; 
+    padding-left: 0; /* Remove o padding padrão de 20px na esquerda para encostar mais */
     padding-right: 20px; /* Mantém o padding na direita para o menu */
 }
 
@@ -77,31 +78,26 @@ body {
     font-weight: 700; /* Negrito */
     font-family: 'Montserrat', sans-serif; /* Fonte para o logo */
     white-space: nowrap; /* Impede que o texto "R&D" quebre de linha antes do slogan */
-
-    /* Espaçamento adicional para o logo se for preciso mais para a esquerda, */
-    /* mas geralmente ajustar o padding do .header-container já resolve. */
-    /* margin-left: -10px; /* Use isso apenas se o padding-left: 0px não for suficiente */
 }
 
 .brand-logo img {
     height: 45px; /* Altura do logo (ajuste conforme o tamanho ideal) */
-    margin-right: 100px; /* Espaço entre o logo e o texto. Ajuste para o que ficar melhor. */
-    margin-left: 20px; /* ADICIONADO: Padding inicial do logo para as bordas */
+    margin-right: 25px; /* Espaço entre o logo e o texto. Ajustado para mais espaço. */
+    margin-left: 20px; /* Padding inicial do logo para as bordas */
 }
 
 .brand-logo span { 
-    /* CORREÇÃO DA QUEBRA DE LINHA: */
-    display: inline; /* Faz com que o span se comporte como um texto na linha */
+    display: inline-block; /* Faz com que o span se comporte como um bloco inline, sem quebrar linha */
     white-space: nowrap; /* Garante que o texto não quebre em múltiplas linhas */
     /* Removido: flex-direction: column; e line-height: 1; que causavam a quebra */
 }
 
 .brand-logo span .brand-highlight {
-    color: var(--text-light); /* Cor de destaque para "A SUA CORRETORA" */
-    font-size: 0.7em; /* Tamanho menor para o slogan (0.7em do pai 1.8em = 1.26em) */
-    font-family: 'Roboto', sans-serif; /* Mantenha a fonte mais fina para o slogan */
+    color: var(--text-light); /* ALTERADO: Cor de destaque para branco */
+    font-size: 0.7em; /* Tamanho menor para o slogan */
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    margin-left: 5px; /* Pequeno espaçamento à esquerda do slogan em relação ao "R&D" */
+    margin-left: 5px; /* Pequeno espaçamento à esquerda do slogan */
 }
 
 /* --- NAVEGAÇÃO PRINCIPAL (Navbar) --- */
@@ -124,6 +120,12 @@ body {
     color: var(--accent-orange); /* Cor de destaque no hover */
 }
 
+/* Estilo para o link da página atual no menu (Navegação) */
+.main-nav .nav-list li a.active {
+    color: var(--accent-orange); /* Muda a cor do link ativo para laranja */
+    font-weight: 700; /* Deixa o link ativo em negrito */
+}
+
 /* Efeito de sublinhado animado no hover */
 .main-nav .nav-list li a::after {
     content: '';
@@ -136,9 +138,11 @@ body {
     transition: width 0.3s ease-out;
 }
 
-.main-nav .nav-list li a:hover::after {
+.main-nav .nav-list li a:hover::after,
+.main-nav .nav-list li a.active::after { /* Garante que o sublinhado esteja ativo por padrão na página atual */
     width: 100%;
 }
+
 
 /* --- BOTÃO DE TOGGLE (HAMBURGUER) PARA MOBILE --- */
 .menu-toggle {
@@ -206,7 +210,7 @@ body {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
-/* Estilos para Botões de Ação Personalizados */
+/* --- Estilos para Botões de Ação Personalizados --- */
 .btn-primary-action,
 .btn-secondary-action {
     display: inline-block;
@@ -266,18 +270,6 @@ body {
     font-weight: 300;
     max-width: 800px;
     margin: 0 auto; /* Centraliza o parágrafo */
-}
-
-/* Estilo para o link da página atual no menu (Navegação) */
-.main-nav .nav-list li a.active {
-    color: var(--accent-orange); /* Muda a cor do link ativo para laranja */
-    font-weight: 700; /* Deixa o link ativo em negrito */
-}
-
-/* Efeito de sublinhado animado no hover para o link ativo (se já tiver um sublinhado ativo) */
-.main-nav .nav-list li a.active::after {
-    width: 100%; /* Garante que o sublinhado esteja ativo por padrão na página atual */
-    background-color: var(--accent-orange);
 }
 
 /* --- SEÇÃO DE SERVIÇOS/SEGUROS --- */
@@ -392,12 +384,13 @@ body {
     max-width: 380px; /* Largura máxima para o card em desktop */
     text-align: left; /* Alinha o texto à esquerda dentro do card */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adiciona transição para o hover */
-    border: 1px solid #007bff; /* Borda muito sutil */
+    border: 2px solid var(--primary-blue); /* Borda sólida de 2px na cor azul principal */
 }
 
 .value-card:hover {
     transform: translateY(-8px); /* Efeito de levantamento ao passar o mouse */
     box-shadow: 0 12px 25px var(--hover-shadow); /* Sombra mais intensa no hover */
+    border-color: var(--dark-blue); /* Opcional: Mudar a cor da borda no hover para um azul mais escuro */
 }
 
 .value-card h3 {
@@ -459,61 +452,146 @@ body {
     font-weight: 700; /* Negrito mais forte */
 }
 
-/* --- RESPONSIVIDADE PARA SEÇÃO SOBRE NÓS --- */
-@media (max-width: 767px) {
-    .about-intro h2 {
-        font-size: 1.8em;
-    }
-
-    .about-intro p {
-        font-size: 1em;
-    }
-
-    .mission-vision-values {
-        flex-direction: column; /* Empilha os cards de valor em mobile */
-        align-items: center; /* Centraliza os cards empilhados */
-    }
-
-    .value-card {
-        min-width: unset; /* Remove min-width para mobile */
-        width: 100%; /* Ocupa toda a largura disponível */
-        max-width: 400px; /* Limita a largura em telas maiores de mobile/tablet */
-        text-align: center; /* Centraliza o texto no card em mobile */
-        padding: 30px 20px; /* Ajusta padding para mobile */
-    }
-    .value-card h3 {
-        text-align: center; /* Garante que o título esteja centralizado no mobile */
-    }
-    /* Se usar o ::after no h3 e quiser centralizá-lo em mobile */
-    /*
-    .value-card h3::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    */
+/* --- SEÇÃO DE CONTATO --- */
+.contact-section {
+    padding: 60px 0;
+    background-color: white; /* Fundo branco para a seção */
+    display: flex; /* Usa flexbox para as colunas de info e formulário */
+    flex-wrap: wrap; /* Permite quebrar em telas menores */
+    justify-content: space-around; /* Espaça as colunas */
+    gap: 40px; /* Espaço entre as colunas */
+    text-align: left; /* Alinhamento padrão do texto */
 }
 
-/* --- RESPONSIVIDADE PARA SEÇÃO SOBRE NÓS --- */
-@media (max-width: 767px) {
-    .about-intro h2 {
-        font-size: 1.8em;
-    }
+.contact-info,
+.contact-form-container {
+    flex: 1; /* Permite que cada coluna ocupe espaço */
+    min-width: 300px; /* Largura mínima antes de empilhar */
+    max-width: 500px; /* Largura máxima para cada coluna */
+    padding: 20px; /* Padding interno */
+}
 
-    .about-intro p {
-        font-size: 1em;
-    }
+.contact-info h2,
+.contact-form-container h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    color: var(--primary-blue);
+    margin-bottom: 25px;
+}
 
-    .mission-vision-values {
-        flex-direction: column; /* Empilha os cards de valor em mobile */
-        align-items: center; /* Centraliza os cards empilhados */
-    }
+.contact-info p {
+    font-size: 1.1em;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
 
-    .value-card {
-        min-width: unset; /* Remove min-width para mobile */
-        width: 100%; /* Ocupa toda a largura disponível */
-        max-width: 400px; /* Limita a largura em telas maiores de mobile/tablet */
-        text-align: center; /* Centraliza o texto no card em mobile */
-    }
+.contact-info ul {
+    list-style: none; /* Remove marcadores */
+    padding: 0;
+}
+
+.contact-info ul li {
+    font-size: 1.1em;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.contact-info ul li strong {
+    color: var(--accent-orange); /* Destaque para telefone/email */
+}
+
+.contact-info ul li a {
+    color: var(--primary-blue); /* Cor do link de email */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info ul li a:hover {
+    color: var(--dark-blue);
+}
+
+/* Estilos do Formulário */
+.contact-form {
+    display: flex;
+    flex-direction: column; /* Campos empilhados */
+    gap: 15px; /* Espaço entre os grupos de formulário */
+}
+
+.form-group {
+    margin-bottom: 10px; /* Espaço abaixo de cada grupo */
+}
+
+.form-group label {
+    display: block; /* Label em sua própria linha */
+    font-size: 1em;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%; /* Ocupa a largura total do container */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-blue); /* Borda azul ao focar */
+    outline: none; /* Remove o contorno padrão do navegador */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra sutil ao focar */
+}
+
+.submit-btn {
+    background-color: var(--accent-orange);
+    color: var(--text-dark);
+    border: none;
+    padding: 15px 25px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    align-self: flex-start; /* Alinha o botão à esquerda se o flex-direction for column */
+}
+
+.submit-btn:hover {
+    background-color: var(--dark-blue);
+    color: var(--text-light);
+}
+
+/* --- SEÇÃO DE MAPA --- */
+.map-section {
+    padding: 60px 0;
+    background-color: var(--light-gray); /* Fundo claro */
+    text-align: center; /* Centraliza o título */
+}
+
+.map-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    color: var(--primary-blue);
+    margin-bottom: 30px;
+}
+
+.map-embed {
+    max-width: 1200px; /* Alinha o mapa com a largura dos outros containers */
+    margin: 0 auto; /* Centraliza o mapa */
+    box-shadow: 0 4px 10px var(--card-shadow); /* Sombra para o mapa */
+    border-radius: 10px; /* Bordas arredondadas para o container do mapa */
+    overflow: hidden; /* Garante que o iframe respeite o border-radius */
+    padding: 0 20px; /* Padding lateral em telas menores */
+}
+
+.map-embed iframe {
+    border-radius: 10px; /* Bordas arredondadas para o iframe em si */
+    display: block; /* Remove espaço extra abaixo do iframe */
 }
 
 /* --- RODAPÉ (Footer) --- */
@@ -532,23 +610,19 @@ body {
 }
 
 .footer-container {
-    display: flex; /* ATIVADO: Transforma o container em flexbox para as colunas */
-    flex-wrap: wrap; /* PERMITE QUEBRA: Permite que as colunas quebrem para a próxima linha em telas pequenas */
-    justify-content: space-between; /* ESPAÇA AS COLUNAS: Distribui o espaço entre as colunas */
-    align-items: flex-start; /* ALINHA O TOPO: Alinha o topo das colunas */
-    gap: 30px; /* ESPAÇO ENTRE ELAS: Espaço entre as colunas */
-    
-    /* Mantenha a largura máxima e centralização, já definidas globalmente ou localmente */
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px; /* Mantém o padding lateral */
+    display: flex; /* Transforma o container em flexbox para as colunas */
+    flex-wrap: wrap; /* Permite que as colunas quebrem para a próxima linha em telas pequenas */
+    justify-content: space-between; /* Espaça as colunas */
+    align-items: flex-start; /* Alinha o topo das colunas */
+    gap: 30px; /* Espaço entre as colunas */
+    max-width: 1200px; /* Largura máxima, já herdada do container global */
+    margin: 0 auto; /* Centraliza, já herdado */
+    padding: 0 20px; /* Padding lateral, já herdado */
 }
 
 .footer-col {
-    /* FLEX-BASIS: Define uma largura inicial para cada coluna. */
-    /* Isso é mais flexível que 'width' e trabalha bem com 'flex: 1' */
     flex: 1; /* Permite que as colunas cresçam e encolham */
-    min-width: 200px; /* Largura mínima antes de quebrar para a próxima linha */
+    min-width: 200px; /* Largura mínima para as colunas antes de quebrar linha */
     max-width: 25%; /* Para telas grandes, tenta limitar a 4 colunas (100% / 4 = 25%) */
     padding: 10px 0; /* Pequeno padding para o conteúdo da coluna */
     text-align: left; /* Alinha o texto à esquerda dentro de cada coluna */
@@ -564,7 +638,7 @@ body {
 }
 
 .main-footer .brand-logo img {
-    height: 45px; /* Altura menor para o logo no footer */
+    height: 35px; /* Altura menor para o logo no footer */
     margin-right: 10px; /* Espaçamento entre logo e texto */
     margin-left: 0; /* Reseta a margem esquerda adicional que havíamos colocado para desktop */
 }
@@ -746,106 +820,14 @@ body {
     .services-grid {
         grid-template-columns: 1fr; /* 1 card por linha em mobile */
     }
-}
-}
 
-/* --- RESPONSIVIDADE (Media Queries) --- */
-
-/* Telas menores que 992px (Desktop -> Tablet) */
-@media (max-width: 991px) {
-    .header-container {
-        flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
-        justify-content: center; /* Centraliza logo e nav em telas menores */
+    /* Contato em telas muito pequenas */
+    .contact-info,
+    .contact-form-container {
+        padding: 20px 10px; /* Reduz o padding para mobile */
     }
 
-    .brand-logo {
-        width: 100%; /* Ocupa toda a largura */
-        justify-content: center; /* Centraliza o logo e o texto */
-        margin-bottom: 15px; /* Espaço abaixo do logo antes do menu */
-        padding-left: 0; /* Remove padding lateral em mobile para centralizar */
-        margin-left: 0; /* Garante que não haja margem negativa */
-    }
-
-    .brand-logo img {
-        margin-left: 0; /* Remove a margem esquerda adicional que havíamos colocado para desktop */
-    }
-
-    .main-nav {
-        width: 100%; /* Ocupa toda a largura */
-        display: flex; /* Garante que a nav seja um flex container */
-        justify-content: center; /* Centraliza o menu hambúrguer */
-        order: 2; /* Garante que a nav apareça abaixo do logo */
-    }
-
-    .main-nav .nav-list {
-        display: none; /* Esconde a lista de navegação por padrão em telas menores */
-        flex-direction: column; /* Itens em coluna */
-        position: absolute; /* Posição absoluta em relação ao body/viewport */
-        top: 100px; /* Distância do topo (ajustar se o header for dinâmico) */
-        left: 0;
-        width: 100%;
-        background-color: var(--dark-blue); /* Fundo para o menu aberto */
-        padding: 20px 0;
-        z-index: 999;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .main-nav .nav-list.active {
-        display: flex; /* Exibe a lista quando a classe 'active' é adicionada */
-    }
-
-    .main-nav .nav-list li {
-        text-align: center;
-        margin: 10px 0;
-    }
-
-    .main-nav .nav-list li a {
-        font-size: 1.2em;
-        padding: 10px 0;
-        display: block; /* Garante que o link ocupe toda a largura */
-    }
-
-    .menu-toggle {
-        display: block; /* Exibe o botão hambúrguer em telas menores */
-        position: absolute; /* Posiciona o hambúrguer no canto, livre do fluxo */
-        right: 20px; /* Distância da direita */
-        top: 25px; /* Distância do topo */
-    }
-
-    .hero-content h1 {
-        font-size: 2.5em; /* Ajusta o título do hero em mobile */
-    }
-
-    .hero-content p {
-        font-size: 1.2em; /* Ajusta o parágrafo do hero em mobile */
-    }
-
-    .services-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Permite 2 cards por linha em tablets */
-    }
-}
-
-/* Telas menores que 768px (Tablet -> Mobile) */
-@media (max-width: 767px) {
-    .hero-section {
-        height: 500px; /* Altura menor para o banner em mobile */
-    }
-
-    .hero-content h1 {
-        font-size: 2em;
-    }
-
-    .hero-content p {
-        font-size: 1.1em;
-    }
-
-    .btn-primary-action,
-    .btn-secondary-action {
-        font-size: 1em;
-        padding: 10px 20px;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr; /* 1 card por linha em mobile */
+    .map-embed {
+        padding: 0 10px; /* Ajusta o padding do mapa em mobile */
     }
 }
