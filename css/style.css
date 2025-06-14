@@ -37,20 +37,11 @@ body {
 }
 
 /* Reutilizando um container básico para centralizar o conteúdo */
-/* hero-content já tem max-width e padding específicos */
-.header-container,
-.services-section .section-title,
-.services-grid,
-.footer-container,
-.about-intro, /* Incluído para About Intro */
-.mission-vision-values, /* Incluído para Missao Visao Valores Grid */
-.contact-section, /* Incluído para a seção de Contato */
-.map-embed { /* Incluído para o mapa */
+.content-container {
     max-width: 1200px; /* Largura máxima do conteúdo */
     margin: 0 auto; /* Centraliza o container */
     padding: 0 20px; /* Padding nas laterais para telas menores */
 }
-
 
 /* --- CABEÇALHO (Header) --- */
 .main-header {
@@ -89,7 +80,6 @@ body {
 .brand-logo span { 
     display: inline-block; /* Faz com que o span se comporte como um bloco inline, sem quebrar linha */
     white-space: nowrap; /* Garante que o texto não quebre em múltiplas linhas */
-    /* Removido: flex-direction: column; e line-height: 1; que causavam a quebra */
 }
 
 .brand-logo span .brand-highlight {
@@ -339,6 +329,113 @@ body {
     align-self: center; /* Centraliza o botão */
     width: calc(100% - 40px); /* Ocupa a largura total do card menos a margem */
 }
+
+/* --- SEÇÃO DE SEGURADORAS PARCEIRAS (Carrossel) --- */
+.partners-section {
+    padding: 60px 0;
+    background-color: var(--light-gray); /* Fundo claro para a seção */
+    text-align: center;
+}
+
+.partners-section .section-title {
+    margin-bottom: 50px;
+}
+
+.partners-section .section-title h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5em;
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+}
+
+.partners-section .section-title p {
+    font-size: 1.1em;
+    color: var(--text-dark);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* --- ESTILOS DO CARROSSEL DE PARCEIROS (Puro CSS) --- */
+.carousel-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px; /* Espaço para os botões nas laterais (mesmo que ocultos) */
+    overflow: hidden; /* IMPORTANTE: Esconde o conteúdo que transborda */
+}
+
+.carousel-track-container {
+    overflow: hidden; /* Garante que o track seja cortado */
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex; /* Faz os logos ficarem em linha */
+    transition: transform 0.5s ease-in-out; /* Transição suave para o movimento */
+}
+
+.partner-logo {
+    min-width: 180px; /* Largura mínima de cada logo. Ajuste conforme necessário. */
+    flex-shrink: 0; /* Impede que os logos encolham mais que min-width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 10px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 120px; /* Altura fixa para todos os cards de logo */
+    margin: 0 15px; /* Espaço entre os logos dentro do track */
+}
+
+.partner-logo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.partner-logo img {
+    max-width: 120px; /* Largura máxima para os logotipos (ajuste conforme o tamanho real dos seus logos) */
+    height: auto;
+    filter: grayscale(80%); /* Deixa os logos levemente cinzas para não competir com o layout */
+    opacity: 0.7; /* Transparência sutil */
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.partner-logo img:hover {
+    filter: grayscale(0%); /* Remove o filtro cinza no hover */
+    opacity: 1; /* Transparência total no hover */
+}
+
+/* Estilos dos Botões de Navegação do Carrossel */
+.carousel-button {
+    display: none !important; /* FORÇA: OCULTA AS SETAS, SOBREPONDO QUALQUER OUTRA REGRA */
+    position: absolute; /* Mantenha absolute para não afetar o layout se reativado */
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-button.prev {
+    left: 0;
+}
+
+.carousel-button.next {
+    right: 0;
+}
+
 
 /* --- SEÇÃO SOBRE NÓS --- */
 .about-section {
@@ -706,7 +803,7 @@ body {
 
 /* --- RESPONSIVIDADE (Media Queries) --- */
 
-/* Telas menores que 992px (Desktop -> Tablet) */
+/* Telas menores que 991px (Desktop -> Tablet) */
 @media (max-width: 991px) {
     .header-container {
         flex-wrap: wrap;
@@ -829,5 +926,23 @@ body {
 
     .map-embed {
         padding: 0 10px; /* Ajusta o padding do mapa em mobile */
+    }
+
+    /* Carrossel de Parceiros em mobile */
+    .carousel-container {
+        padding: 0 20px; /* Reduz o padding para os botões */
+    }
+    .partner-logo {
+        min-width: 100px; /* Largura mínima para mobile */
+        height: 80px;
+        margin: 0 5px; /* Espaço entre os logos */
+        padding: 10px 5px;
+    }
+    .partner-logo img {
+        max-width: 70px;
+    }
+    .carousel-button {
+        padding: 6px 10px;
+        font-size: 1.1em;
     }
 }
