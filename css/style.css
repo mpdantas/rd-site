@@ -801,6 +801,10 @@ body {
     color: var(--primary-blue); /* Cor de destaque no hover */
 }
 
+.social-links .whatsapp-icon:hover {
+    color: #1DA851; /* Um verde um pouco mais escuro no hover */
+}
+
 /* --- RESPONSIVIDADE (Media Queries) --- */
 
 /* Telas menores que 991px (Desktop -> Tablet) */

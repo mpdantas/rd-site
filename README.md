@@ -42,9 +42,9 @@ rd-site/
 
 Para ver o site em funcionamento:
 
-1.  **Clone o repositório** para sua máquina local (se estiver no GitHub) ou baixe os arquivos.
-2.  **Abra a pasta `rd-site`** no seu explorador de arquivos.
-3.  **Dê um clique duplo no arquivo `index.html`** para abri-lo em seu navegador padrão.
+1. **Clone o repositório** para sua máquina local (se estiver no GitHub) ou baixe os arquivos.
+2. **Abra a pasta `rd-site`** no seu explorador de arquivos.
+3. **Dê um clique duplo no arquivo `index.html`** para abri-lo em seu navegador padrão.
 
 ---
 
