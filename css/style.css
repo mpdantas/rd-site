@@ -242,7 +242,7 @@ body {
 .page-hero {
     background-color: var(--primary-blue); /* Fundo azul, similar ao header */
     color: var(--text-light); /* Texto claro */
-    padding: 60px 20px; /* Padding generoso */
+    padding: 0px 20px; /* Padding generoso */
     text-align: center;
     margin-bottom: 40px; /* Espaço abaixo do banner */
     margin-top: -30px; /* Para subir e encostar no cabeçalho */
@@ -628,14 +628,34 @@ body {
 
 .form-group input[type="text"],
 .form-group input[type="email"],
-.form-group textarea {
-    width: 100%; /* Ocupa a largura total do container */
+.form-group textarea,
+.form-group select { /* NOVO: Adicionado 'select' aqui */
+    width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
     font-family: 'Roboto', sans-serif;
     transition: border-color 0.3s ease;
+    /* Para o select, você pode querer remover a seta padrão do navegador em alguns casos,
+       e estilizar uma seta customizada com CSS. Por enquanto, a seta padrão aparece. */
+    -webkit-appearance: none; /* Remove o estilo padrão da seta em Webkit browsers */
+    -moz-appearance: none; /* Remove o estilo padrão da seta em Firefox */
+    appearance: none; /* Remove o estilo padrão da seta */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.7L146.2%20202.7%2018.5%2075.1a17.6%2017.6%200%200%200-25.3%2023.3L133.4%20238a17.6%2017.6%200%200%200%2025.3%200L287%2092.7a17.6%2017.6%200%200%200%200-23.3z%22%2F%3E%3C%2Fsvg%3E'); /* Ícone de seta SVG base64 */
+    background-repeat: no-repeat;
+    background-position: right 1em top 50%;
+    background-size: 0.65em auto;
+    padding-right: 2.5em; /* Garante espaço para a seta */
+}
+
+/* Também inclua 'select' nos estilos de focus */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { /* NOVO: Adicionado 'select' aqui */
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .form-group input:focus,
@@ -803,6 +823,100 @@ body {
 
 .social-links .whatsapp-icon:hover {
     color: #1DA851; /* Um verde um pouco mais escuro no hover */
+}
+
+/* --- ESTILOS DO MODAL (POPUP) --- */
+.modal-overlay {
+    display: none; /* Escondido por padrão */
+    position: fixed; /* Fixa na tela, independente da rolagem */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo preto semi-transparente */
+    display: flex; /* Usa flexbox para centralizar o conteúdo */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Garante que fique acima de tudo */
+    opacity: 0; /* Começa invisível para transição */
+    visibility: hidden; /* Esconde completamente para transição */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Transição suave */
+}
+
+.modal-overlay.active { /* Classe adicionada por JS para mostrar o modal */
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px; /* Largura máxima do popup */
+    width: 90%; /* Ocupa 90% da largura em telas menores */
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center; /* Centraliza o texto do modal */
+    transform: translateY(20px); /* Começa um pouco abaixo para o efeito */
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0); /* Sobe para a posição final */
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: var(--text-dark);
+    cursor: pointer;
+    line-height: 1; /* Para alinhar o 'x' */
+    transition: color 0.2s ease;
+}
+
+.modal-close-button:hover {
+    color: var(--accent-orange);
+}
+
+.modal-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+}
+
+.modal-description {
+    font-size: 1.1em;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    line-height: 1.6;
+    text-align: left; /* Alinha o texto da descrição à esquerda */
+}
+
+.modal-whatsapp-btn {
+    /* Reutiliza o estilo do botão primário */
+    display: inline-block; /* Para centralizar se o texto for menor */
+}
+
+/* --- RESPONSIVIDADE PARA O MODAL --- */
+@media (max-width: 767px) {
+    .modal-content {
+        padding: 20px;
+        max-width: 95%;
+    }
+    .modal-title {
+        font-size: 1.8em;
+    }
+    .modal-description {
+        font-size: 1em;
+    }
+    .modal-close-button {
+        font-size: 1.8em;
+    }
 }
 
 /* --- RESPONSIVIDADE (Media Queries) --- */

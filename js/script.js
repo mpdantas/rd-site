@@ -201,3 +201,63 @@ document.addEventListener('DOMContentLoaded', () => {
     //     carouselContainer.addEventListener('mouseleave', startAutoSlide);
     // }
 });
+
+// --- Funcionalidade do Modal de Detalhes do Serviço ---
+
+const serviceModal = document.getElementById('serviceModal');
+const modalCloseButton = document.querySelector('.modal-close-button');
+const modalTitle = document.querySelector('.modal-title');
+const modalDescription = document.querySelector('.modal-description');
+const modalWhatsappBtn = document.querySelector('.modal-whatsapp-btn');
+
+// Seleciona todos os botões "Saiba Mais" que devem abrir o modal
+const openModalButtons = document.querySelectorAll('.open-service-modal');
+
+// Função para abrir o modal
+function openModal(title, description, whatsappMsg) {
+    // Preenche o conteúdo do modal com os dados do card clicado
+    modalTitle.textContent = title;
+    modalDescription.textContent = description;
+    // Monta o link do WhatsApp com a mensagem pré-definida
+    modalWhatsappBtn.href = `https://wa.me/11994856220?text=${encodeURIComponent(whatsappMsg)}`; // Substitua SEUNUMERO pelo seu número real aqui também!
+    
+    // Adiciona a classe 'active' para exibir o modal (via CSS)
+    serviceModal.classList.add('active');
+    // Previne o scroll do corpo da página enquanto o modal estiver aberto
+    document.body.style.overflow = 'hidden'; 
+}
+
+// Função para fechar o modal
+function closeModal() {
+    serviceModal.classList.remove('active');
+    // Permite o scroll do corpo da página novamente
+    document.body.style.overflow = ''; 
+}
+
+// Adiciona event listeners aos botões "Saiba Mais"
+openModalButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+        event.preventDefault(); // Previne o comportamento padrão do link (não ir para #)
+        const title = button.dataset.title; // Obtém o título do atributo data-title
+        const description = button.dataset.description; // Obtém a descrição do atributo data-description
+        const whatsappMsg = button.dataset.whatsappMsg; // Obtém a mensagem do WhatsApp do atributo data-whatsapp-msg
+        openModal(title, description, whatsappMsg);
+    });
+});
+
+// Adiciona event listeners para fechar o modal
+modalCloseButton.addEventListener('click', closeModal);
+
+// Fecha o modal ao clicar fora do conteúdo (no overlay)
+serviceModal.addEventListener('click', (event) => {
+    if (event.target === serviceModal) { // Verifica se o clique foi no overlay, não no conteúdo
+        closeModal();
+    }
+});
+
+// Fecha o modal ao pressionar a tecla ESC
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && serviceModal.classList.contains('active')) {
+        closeModal();
+    }
+});

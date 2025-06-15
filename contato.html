@@ -63,7 +63,14 @@
                     </div>
                     <div class="form-group">
                         <label for="subject">Assunto:</label>
-                        <input type="text" id="subject" name="subject" required>
+                        <select id="subject" name="subject" required>
+                            <option value="">Selecione o motivo do contato...</option>
+                            <option value="cotacao-novo-seguro">Cotação de Novo Seguro</option>
+                            <option value="renovacao-seguro">Renovação de Seguro</option>
+                            <option value="sinistro">Aviso de Sinistro</option>
+                            <option value="financeiro">Financeiro</option>
+                            <option value="outros">Outros Assuntos</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="message">Mensagem:</label>
