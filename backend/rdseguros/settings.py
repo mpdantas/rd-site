@@ -37,12 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'contato',
+    'corsheaders',  # ADICIONADO: Essencial para o CORS, deve vir antes do seu app
+    'contato',      # SEU APP DE CONTATO
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # ADICIONADO: Processa as requisições CORS. POSICIONE AQUI.
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -121,3 +123,36 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# ================================================================
+# Configurações para CORS (Cross-Origin Resource Sharing)
+# ESSENCIAL para permitir que seu frontend (site HTML) se comunique com este backend.
+# ================================================================
+CORS_ALLOWED_ORIGINS = [
+    "null",                     # Essencial para testes locais ao abrir o HTML diretamente via file://
+    "http://127.0.0.1:8000",    # Onde seu backend Django está rodando por padrão (se usar porta 8000)
+    "http://localhost:8000",    # Outra forma de acessar localhost (inclua se usar Live Server, ex: "http://127.0.0.1:5500")
+    # ADICIONE AQUI O DOMÍNIO DO SEU SITE QUANDO ELE ESTIVER ONLINE (em produção), EX: "https://rdseguros.com.br"
+]
+CORS_ALLOW_ALL_ORIGINS = False # Em produção, defina como False e liste apenas os domínios permitidos
+
+
+# ================================================================
+# Configurações de E-mail (SMTP)
+# ESSENCIAL para o Django poder enviar e-mails.
+# ================================================================
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.example.com'        # SUBSTITUA: Servidor SMTP do seu provedor de e-mail (Ex: 'smtp.gmail.com', 'smtp-mail.outlook.com')
+EMAIL_PORT = 587                       # GERALMENTE 587 para TLS/STARTTLS. Pode ser 465 para SSL.
+EMAIL_USE_TLS = True                   # GERALMENTE True para a porta 587
+# EMAIL_USE_SSL = False                # Se usar porta 465, mude EMAIL_USE_TLS para False e EMAIL_USE_SSL para True
+
+EMAIL_HOST_USER = 'seu_email@example.com' # SUBSTITUA: O SEU ENDEREÇO DE E-MAIL (REMETENTE)
+EMAIL_HOST_PASSWORD = 'sua_senha_do_email' # SUBSTITUA: A SENHA DESSE E-MAIL. **ATENÇÃO AO GMAIL!**
+DEFAULT_FROM_EMAIL = 'seu_email@example.com' # Opcional: E-mail que aparecerá como remetente padrão
+DEFAULT_TO_EMAIL = 'contato_corretora@example.com' # SUBSTITUA: O E-MAIL DA CORRETORA (para onde o formulário vai enviar)
+
+# Para depuração: se tiver problemas com e-mail, pode temporariamente usar o backend de console.
+# As mensagens de e-mail aparecerão no terminal onde seu servidor Django está rodando.
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -709,6 +709,7 @@ body {
 .map-embed iframe {
     border-radius: 10px; /* Bordas arredondadas para o iframe em si */
     display: block; /* Remove espaço extra abaixo do iframe */
+    border: 0; /* NOVO: ADICIONADO AQUI PARA TIRAR A BORDA PADRÃO */
 }
 
 /* --- RODAPÉ (Footer) --- */

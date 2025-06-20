@@ -13,8 +13,7 @@
         <div class="header-container">
             <a href="index.html" class="brand-logo">
                 <img src="images/logo.png" alt="Logo R&D Grupo">
-                <span>R&D <span class="brand-highlight">A SUA CORRETORA SEMPRE COM VOCÊ</span>
-            </a>
+                <span>R&D <span class="brand-highlight">A SUA CORRETORA SEMPRE COM VOCÊ</span></span> </a>
             
             <nav class="main-nav">
                 <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
@@ -26,7 +25,8 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="nossos-seguros.html">Nossos Seguros</a></li>
                     <li><a href="sobre-nos.html">Sobre Nós</a></li>
-                    <li><a href="contato.html" class="active">Contato</a></li> </ul>
+                    <li><a href="contato.html" class="active">Contato</a></li>
+                </ul>
             </nav>
         </div>
     </header>
@@ -52,8 +52,7 @@
 
             <div class="contact-form-container">
                 <h2>Envie-nos uma Mensagem</h2>
-                <form class="contact-form" action="#" method="POST">
-                    <div class="form-group">
+                <form class="contact-form" id="contactForm"> <div class="form-group">
                         <label for="name">Nome Completo:</label>
                         <input type="text" id="name" name="name" required>
                     </div>
@@ -85,13 +84,13 @@
             <h2>Nossa Localização</h2>
             <div class="map-embed">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.116157387407!2d-46.46424582467203!3d-23.492325278847318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce610b9054404b%3A0x78bcfb7d6cc96392!2sR.%20Francisca%20da%20Silveira%20Queiroz%2C%2074a%20-%20Parque%20Cruzeiro%20do%20Sul%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2008070-270!5e0!3m2!1spt-BR!2sbr!4v1749861533404!5m2!1spt-BR!2sbr"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.077651034376!2d-46.43851532585253!3d-23.528434778848417!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce6141a0210e7b%3A0x6b7b7f1e5f8f8b7b!2sRua%20Francisca%20da%20Silveira%20Queiroz%2C%2074A%20-%20Vila%20Silveira%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2008061-000!5e0!3m2!1spt-BR!2sbr!4v1718749870000!5m2!1spt-BR!2sbr"
                     width="100%" 
                     height="450" 
-                    style="border:0;" 
                     allowfullscreen="" 
                     loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Mapa de localização da R&D Grupo"> 
                 </iframe>
             </div>
         </section>
@@ -102,12 +101,12 @@
         <div class="footer-divider"></div>
         <div class="footer-container">
             <div class="footer-col footer-col-brand">
-                <a href="#" class="brand-logo">
+                <a href="index.html" class="brand-logo">
                     <img src="images/logo.png" alt="Logo R&D Grupo">
-                </a>
-                <p>&copy; <span id="current-year"></span> R&D Grupo. Todos os direitos reservados.</p>
-             </div>
-
+                    <span>R&D <span class="brand-highlight">A SUA CORRETORA</span></span> </a>
+                <p>© <span id="current-year"></span> R&D Grupo. Todos os direitos reservados.</p>
+                
+            </div>
             <div class="footer-col footer-col-links">
                 <h3>Precisa de ajuda?</h3>
                 <ul>
@@ -116,19 +115,16 @@
                     <li><a href="#">Política de privacidade</a></li>
                 </ul>
             </div>
-
             <div class="footer-col footer-col-info">
                 <h3>R&D Grupo | Seguros</h3>
                 <p>Criado por MD Tech Engenharia</p>
             </div>
-
             <div class="footer-col footer-col-social">
                 <h3>Siga-nos</h3>
                 <div class="social-links">
-                    <a href="#" class="social-icon" aria-label="Nosso Canal no Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="social-icon" aria-label="Nosso Perfil no Instagram"><i class="fab fa-instagram"></i></a>
-
-                    <a href="https://wa.me/5511994856220" target="_blank" class="social-icon whatsapp-icon" aria-label="Fale Conosco pelo WhatsApp">
+                    <a href="https://www.facebook.com/rdsuacorretora/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Nosso Perfil no Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/rosanarodriguesrd/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Nosso Perfil no Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/5511994856220" target="_blank" rel="noopener noreferrer" class="social-icon whatsapp-icon" aria-label="Fale Conosco pelo WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </a>
                 </div>
@@ -136,6 +132,14 @@
         </div>
     </footer>
 
+    <div id="serviceModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button">X</button>
+            <h3 class="modal-title"></h3>
+            <p class="modal-description"></p>
+            <a href="#" target="_blank" class="btn-primary-action modal-whatsapp-btn">Fale Conosco via WhatsApp</a>
+        </div>
+    </div>
     <script src="js/script.js"></script>
 </body>
 </html>
