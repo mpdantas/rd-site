@@ -10,6 +10,7 @@
           "iframe[referrerpolicy=no-referrer-when-downgrade]"
         ]
       }
-    ]
+    ],
+    "meta-viewport": "off"
   }
 }
